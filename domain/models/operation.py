@@ -16,4 +16,4 @@ class Operation(Base):
         self.status = True
 
     def __repr__(self):
-        return f"<Operation {self.type}, {self.cost}>"
+        return f"<Operation {self.id}, {self.type}, {self.cost}>"
