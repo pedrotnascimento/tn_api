@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from .base import Base
-from abc import ABC, abstractmethod
 
 class Operation(Base):
     __tablename__ = "operation"

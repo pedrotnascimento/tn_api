@@ -2,7 +2,7 @@ from domain.business_logic.operation_action import OperationAction
 from domain.models.operation import Operation
 
 
-class AdditionOperator(OperationAction):
+class AdditionOperation(OperationAction):
     def __init__(self, operation: Operation):
         super().__init__(operation)
 
