@@ -58,7 +58,8 @@ def test_connection():
 
 
 from routes.users_routes import *
-from routes.operation_routes import *
+from routes.operations_routes import *
+from routes.records_routes import *
 from routes.authentication_routes import *
 
 if __name__ == "__main__":

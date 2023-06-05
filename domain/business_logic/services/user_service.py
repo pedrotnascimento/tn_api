@@ -2,7 +2,10 @@ from injector import inject
 from domain.models.user import User
 from infrastructure.repositories.user_repository import UserRepository
 import logging
+
 logger = logging.getLogger("infoLogger")
+
+
 class UserService:
     @inject
     def __init__(self, user_repository: UserRepository):
@@ -24,4 +27,3 @@ class UserService:
         new_user = self.user_repository.insert(user)
         logger.info("USER CREATED")
         return new_user
-        

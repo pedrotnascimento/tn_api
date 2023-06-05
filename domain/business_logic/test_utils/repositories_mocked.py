@@ -13,6 +13,7 @@ class RecordMockRepository:
     def last_record_from_user(self, user_id) -> Record:
         instances = list(filter(lambda x: x.user_id == user_id, self.instances))
         instances_sorted = sorted(instances, key=lambda x: x.id, reverse=True)
+        
         return instances_sorted[0] if len(instances_sorted) else None
 
     def insert(self, instance: Record):

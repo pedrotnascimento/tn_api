@@ -10,6 +10,7 @@ from infrastructure.repositories.user_repository import UserRepository
 
 class OperationManager:
     NEW_USER_BALANCE = 10
+
     @inject
     def __init__(
         self,
@@ -26,9 +27,14 @@ class OperationManager:
     def get_result(self, user_id, operation_id, *arguments):
         operation_instance: Operation = self.operation_repository.get(operation_id)
         operation_action = self.operation_factory.get_operation(operation_instance.type)
-        
+
+        last_record = self.record_repository.last_record_from_user(user_id)
+        if last_record is not None:
+            if last_record.user_balance - operation_instance.cost < 0:
+                return None
+
         result = self.calculate_result(operation_action, *arguments)
-        new_balance = self.calculate_new_user_balance(user_id, operation_instance)
+        new_balance = self.calculate_new_user_balance(last_record, operation_instance)
         record = Record(
             user_id,
             operation_instance.id,
@@ -40,14 +46,12 @@ class OperationManager:
         self.record_repository.insert(record)
         return result
 
-
     def calculate_result(self, operation_action, *arguments):
         calculator = CalculatorStrategy()
         result = calculator.calculate(operation_action, *arguments)
         return result
 
-    def calculate_new_user_balance(self, user_id, operation_instance):
-        last_record: Record = self.record_repository.last_record_from_user(user_id)
+    def calculate_new_user_balance(self, last_record, operation_instance):
         if last_record is not None:
             amount_updated = last_record.user_balance - operation_instance.cost
         else:

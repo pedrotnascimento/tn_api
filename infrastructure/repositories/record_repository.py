@@ -16,3 +16,15 @@ class RecordRepository:
     def insert(self, record: Record):
         db.session.add(record)
         db.session.commit()
+
+
+    def get_pagination(self, user_id: int, page: int, per_page: int, order_by: str):
+        select_stmt = db.select(Record).where(Record.user_id == user_id)
+        if order_by == "desc":
+            select_stmt = select_stmt.order_by(Record.date.desc())
+        else:
+            select_stmt = select_stmt.order_by(Record.date)
+        paginated_items = db.paginate(
+            select=select_stmt, page=page, per_page=per_page, count=True
+        )
+        return paginated_items
