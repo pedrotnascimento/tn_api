@@ -43,4 +43,4 @@ Logon AWS services
 Push image
 > docker push 917957058161.dkr.ecr.sa-east-1.amazonaws.com/tn-repository
 
-Create new task on AWS ECR (Elastic Container Registry) Service 
+Create new task on AWS ECR (Elastic Container Registry) Service "# tn_front" 
