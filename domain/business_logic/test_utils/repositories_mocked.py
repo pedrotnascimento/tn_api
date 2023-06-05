@@ -87,3 +87,7 @@ class OperationMockRepository:
         )
         instances_temp.append(instance)
         self.instances = instances_temp
+
+    def get_by_type(self, type):
+        instances = list(filter(lambda x: x.type == type, self.instances))
+        return instances[0] if len(instances) else None        

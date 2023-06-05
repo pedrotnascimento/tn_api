@@ -24,8 +24,8 @@ class OperationManager:
         self.record_repository = record_repository
         self.operation_factory = operation_factory
 
-    def get_result(self, user_id, operation_id, *arguments):
-        operation_instance: Operation = self.operation_repository.get(operation_id)
+    def get_result(self, user_id, operation_type, *arguments):
+        operation_instance: Operation = self.operation_repository.get_by_type(operation_type)
         operation_action = self.operation_factory.get_operation(operation_instance.type)
 
         last_record = self.record_repository.last_record_from_user(user_id)

@@ -16,14 +16,14 @@ def make_operation(**kwargs):
         operation_manager: OperationManager = injector.get(OperationManager)
         user: User = kwargs["user_session"]
         user_id = user.id
-        operation_id = data["operation_id"]
+        operation_type = data["operation_type"]
         arguments = tuple(data["arguments"])
         if user_id is None:
             abort(400)
-        if operation_id is None:
+        if operation_type is None:
             abort(400)
 
-        response = operation_manager.get_result(user_id, operation_id, *arguments)
+        response = operation_manager.get_result(user_id, operation_type, *arguments)
         if response is None:
             abort(400)
         return jsonify({"result": response}), 201

@@ -44,7 +44,7 @@ class TestManageOperation(unittest.TestCase):
             operation_factory=self.operation_factory,
         )
 
-        result = manager.get_result(self.user1.id, self.operators[0].id, 1, 2)
+        result = manager.get_result(self.user1.id, self.operators[0].type, 1, 2)
 
         self.assertEqual(result, 3)
         record = record_repository.last_record_from_user(self.user1.id)
@@ -68,7 +68,7 @@ class TestManageOperation(unittest.TestCase):
             operation_factory=self.operation_factory,
         )
 
-        result = manager.get_result(self.user1.id, self.operators[0].id, 1, 2)
+        result = manager.get_result(self.user1.id, self.operators[0].type, 1, 2)
 
         self.assertEqual(result, 3)
         record = record_repository.last_record_from_user(self.user1.id)
@@ -92,7 +92,7 @@ class TestManageOperation(unittest.TestCase):
             operation_factory=self.operation_factory,
         )
 
-        result = manager.get_result(self.user1.id, self.operators[0].id, 1, 2)
+        result = manager.get_result(self.user1.id, self.operators[0].type, 1, 2)
 
         self.assertEqual(result, None)
         insert_spy.assert_not_called()
