@@ -2,7 +2,8 @@ from domain.models.operation import Operation
 from domain.models.record import Record
 from domain.models.user import User
 
-class RecordMockRepository():
+
+class RecordMockRepository:
     def __init__(self, instances):
         self.instances: list[object] = instances
 
@@ -11,11 +12,11 @@ class RecordMockRepository():
 
     def last_record_from_user(self, user_id) -> Record:
         instances = list(filter(lambda x: x.user_id == user_id, self.instances))
-        instances_sorted  = sorted(instances,key=lambda x: x.id, reverse=True)
+        instances_sorted = sorted(instances, key=lambda x: x.id, reverse=True)
         return instances_sorted[0] if len(instances_sorted) else None
 
     def insert(self, instance: Record):
-        instance.id = len(self.instances)+1
+        instance.id = len(self.instances) + 1
         self.instances.append(instance)
 
     def delete(self, id):
@@ -27,7 +28,7 @@ class RecordMockRepository():
         self.instances = instances_temp
 
 
-class UserMockRepository():
+class UserMockRepository:
     def __init__(self, instances):
         self.instances: list[object] = instances
 
@@ -36,7 +37,7 @@ class UserMockRepository():
         return instances[0] if len(instances) else None
 
     def insert(self, instance: User):
-        instance.id = len(self.instances)+1
+        instance.id = len(self.instances) + 1
         self.instances.append(instance)
 
     def delete(self, id):
@@ -50,8 +51,17 @@ class UserMockRepository():
         instances_temp.append(instance)
         self.instances = instances_temp
 
+    def get_by_name(self, username: str):
+        instances = list(
+            filter(
+                lambda x: x.username == username,
+                self.instances,
+            )
+        )
+        return instances[0] if len(instances) else None
 
-class OperationMockRepository():
+
+class OperationMockRepository:
     def __init__(self, instances):
         self.instances: list[object] = instances
 
@@ -60,7 +70,7 @@ class OperationMockRepository():
         return instances[0] if len(instances) else None
 
     def insert(self, instance: Operation):
-        instance.id = len(self.instances)+1
+        instance.id = len(self.instances) + 1
         self.instances.append(instance)
 
     def delete(self, id):

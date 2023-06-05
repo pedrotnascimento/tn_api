@@ -1,16 +1,28 @@
+import logging
+from os import environ
 from flask import Flask
 from flask_migrate import Migrate
 from infrastructure.repositories.operation_repository import OperationRepository
 from infrastructure.repositories.record_repository import RecordRepository
+from flask_cors import CORS
 
 
 app = Flask(__name__)
-app.config[
-    "SQLALCHEMY_DATABASE_URI"
-] = "postgresql://postgres:example@localhost:5432/db_local"
-app.config["SECRET_KEY"] = "someRandomSecretKey"
+CORS(app)
 
 from infrastructure.db import db
+
+env = environ.get("ENVIRONMENT")
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("infoLogger")
+logger.setLevel(logging.INFO)
+
+if env== 'production':
+    logger.info("Production environment settings")
+    app.config.from_object('config.ProdConfig')
+else:
+    logger.info("Development environment settings")
+    app.config.from_object('config.DevConfig')
 
 db.init_app(app)
 migrate = Migrate(app, db)

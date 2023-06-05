@@ -3,16 +3,19 @@ from flask import abort, request
 from flask import jsonify
 from domain.business_logic.operation_manager import OperationManager
 from domain.business_logic.services.user_service import UserService
+from domain.models.user import User
 import infrastructure.auth as auth
 
 
 @app.route("/v1/operations", methods=["POST"])
 @auth.token_required
-def make_operation():
+def make_operation(**kwargs):
+    
     if request.is_json:
         data = request.get_json()
         operation_manager: OperationManager = injector.get(OperationManager)
-        user_id = data["user_id"]
+        user: User = kwargs["user_session"]
+        user_id = user.id
         operation_id = data["operation_id"]
         arguments = tuple(data["arguments"])
         if user_id is None:

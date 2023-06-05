@@ -4,10 +4,10 @@ from app import app
 from flask import request, jsonify
 import jwt
 from werkzeug.security import check_password_hash
-
+import logging 
 from .repositories.user_repository import UserRepository
 
-
+logger = logging.getLogger("infoLogger")
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -18,13 +18,17 @@ def token_required(f):
         if not token:
             return jsonify({"message": "token is missing", "data": []}), 401
         try:
-            data = jwt.decode(token, app.config["SECRET_KEY"])
+            logger.info("AUTHENTICATING")
+            data = jwt.decode(token, app.config["SECRET_KEY"],algorithms="HS256")
             username = data["username"]
             user_repository = UserRepository()
             current_user = user_repository.get_by_name(username)
-        except:
+            kwargs["user_session"] = current_user
+        except Exception as e:
+            logger.info(str(e))
             return jsonify({"message": "token is invalid or expired", "data": []}), 401
-        return f(current_user, *args, **kwargs)
+        logger.info("AUTHENTICATION SUCCEED")
+        return f(*args, **kwargs)
 
     return decorated
 
