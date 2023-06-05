@@ -1,8 +1,7 @@
 
 from domain.models.user import User
-from infrastructure.repositories.base_repository import BaseRepository
 from infrastructure.db import db
-class UserRepository(BaseRepository):
+class UserRepository():
     def get(self, id: int):
         user = User.query.get(id)
         if user:

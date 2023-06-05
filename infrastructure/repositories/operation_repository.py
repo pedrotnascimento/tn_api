@@ -1,8 +1,6 @@
 from domain.models.operation import Operation
-from infrastructure.repositories.base_repository import BaseRepository
 
-
-class OperationRepository(BaseRepository):
+class OperationRepository():
     def get(self, id: int):
         operation = Operation.query.get(id)
         return operation

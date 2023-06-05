@@ -8,6 +8,8 @@ app = Flask(__name__)
 app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = "postgresql://postgres:example@localhost:5432/db_local"
+app.config["SECRET_KEY"] = "someRandomSecretKey"
+
 from infrastructure.db import db
 
 db.init_app(app)
@@ -45,6 +47,7 @@ def test_connection():
 
 from routes.users_routes import *
 from routes.operation_routes import *
+from routes.authentication_routes import *
 
 if __name__ == "__main__":
     app.run(debug=True)

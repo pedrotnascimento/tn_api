@@ -1,11 +1,8 @@
 from domain.models.operation import Operation
 from domain.models.record import Record
 from domain.models.user import User
-from infrastructure.repositories.base_repository import BaseRepository
-from infrastructure.repositories.record_repository import RecordRepository
 
-
-class RecordMockRepository(BaseRepository):
+class RecordMockRepository():
     def __init__(self, instances):
         self.instances: list[object] = instances
 
@@ -30,7 +27,7 @@ class RecordMockRepository(BaseRepository):
         self.instances = instances_temp
 
 
-class UserMockRepository(BaseRepository):
+class UserMockRepository():
     def __init__(self, instances):
         self.instances: list[object] = instances
 
@@ -54,7 +51,7 @@ class UserMockRepository(BaseRepository):
         self.instances = instances_temp
 
 
-class OperationMockRepository(BaseRepository):
+class OperationMockRepository():
     def __init__(self, instances):
         self.instances: list[object] = instances
 

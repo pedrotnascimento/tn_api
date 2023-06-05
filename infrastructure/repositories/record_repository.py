@@ -1,9 +1,8 @@
 from domain.models.record import Record
-from infrastructure.repositories.base_repository import BaseRepository
 from infrastructure.db import db
 
 
-class RecordRepository(BaseRepository):
+class RecordRepository:
     def get() -> list[Record]:
         return Record.query.all()
 
@@ -17,5 +16,3 @@ class RecordRepository(BaseRepository):
     def insert(self, record: Record):
         db.session.add(record)
         db.session.commit()
-
-    
