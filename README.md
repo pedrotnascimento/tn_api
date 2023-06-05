@@ -9,6 +9,7 @@ API for a recruiting process
 > flask run
 
 ## Testing
-> python -m coverage run -m unittest tests.py
+> python -m coverage run -m unittest 
+> python -m coverage html
 
-Register your tests into ./test.py file 
+Register your tests into ./tests.py file 

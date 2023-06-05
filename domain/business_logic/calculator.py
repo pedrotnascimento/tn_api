@@ -1,6 +1,6 @@
-from domain.business_logic.operation_action import OperationAction
+from domain.business_logic.operation_action_abstract import OperationActionAbstract
 
 
 class CalculatorStrategy:
-    def calculate(self, operation: OperationAction, *args):        
+    def calculate(self, operation: OperationActionAbstract, *args):        
         return operation.operate(*args)

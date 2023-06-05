@@ -2,8 +2,8 @@ import unittest
 from unittest.mock import MagicMock
 from domain.business_logic.manage_operation import ManageOperation
 from domain.business_logic.operation_factory import OperationFactory
-from domain.business_logic.operations.addition_operation import AdditionOperation
-from domain.business_logic.tests.mocked_repository.repositories_mocked import (
+from domain.business_logic.operations.addition_operation_action import AdditionOperationAction
+from domain.business_logic.test_utils.repositories_mocked import (
     OperationMockRepository,
     RecordMockRepository,
     UserMockRepository,
@@ -11,17 +11,15 @@ from domain.business_logic.tests.mocked_repository.repositories_mocked import (
 from domain.models.operation import Operation
 from domain.models.record import Record
 from domain.models.user import User
-from mock import patch
 
 
 class TestManageOperation(unittest.TestCase):
     def setUp(self):
         operator = Operation("addition", 2)
-        operator = Operation("addition", 2)
         operator.id = 1
         self.operators = [operator]
 
-        operators_actions = [AdditionOperation(operator)]
+        operators_actions = [AdditionOperationAction()]
         self.operation_factory = OperationFactory(operators_actions)
         self.operators_actions = operators_actions
 

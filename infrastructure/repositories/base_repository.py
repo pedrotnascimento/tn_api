@@ -5,10 +5,10 @@ class BaseRepository(ABC):
     def get(id: int):
         pass
     @abstractmethod
-    def update(id: int):
+    def insert(id: int):
         pass
     @abstractmethod
-    def insert(id: int):
+    def update(id: int):
         pass
     @abstractmethod
     def delete(id: int):

@@ -1,28 +1,25 @@
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import relationship
-from .base import Base
-from domain.models.user import User
+from infrastructure.db import db
 
-class Record(Base):
+
+class Record(db.Model):
     __tablename__ = "record"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    
-    operation_id: Mapped[int]  = mapped_column(ForeignKey("operation.id"))
+    id = db.Column(db.Integer(), primary_key=True)
+    operation_id = db.Column(db.Integer())
+    user_id = db.Column(db.Integer())
+    amount = db.Column(db.Integer())
+    user_balance = db.Column(db.Integer())
+    operation_response = db.Column(db.String())
+    status = db.Column(db.Boolean())
 
-    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
-    amount: Mapped[int]
-    user_balance: Mapped[int]
-    operation_response: Mapped[str]
-    status: Mapped[bool]
-
-    def __init__(self,user_id: int,  
-                 operation_id: int, 
-                 amount: int, 
-                 user_balance: int, 
-                 operation_response: str):
+    def __init__(
+        self,
+        user_id: int,
+        operation_id: int,
+        amount: int,
+        user_balance: int,
+        operation_response: str,
+    ):
         self.operation_id = operation_id
         self.user_id = user_id
         self.amount = amount

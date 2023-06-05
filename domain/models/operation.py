@@ -1,14 +1,12 @@
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from .base import Base
+from infrastructure.db import db
 
-class Operation(Base):
+class Operation(db.Model):
     __tablename__ = "operation"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    type: Mapped[str]
-    cost: Mapped[int]
-    status: Mapped[bool]
+    id=db.Column(db.Integer(), primary_key=True)
+    type = db.Column(db.String())
+    cost = db.Column(db.Integer())
+    status = db.Column(db.Boolean())
 
     def __init__(self, type: str, cost: int):
         self.type = type

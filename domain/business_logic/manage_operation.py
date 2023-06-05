@@ -22,13 +22,15 @@ class ManageOperation:
         self.operation_factory = operation_factory
 
     def get_result(self, user_id, operation_id, *arguments):
-        operation_action = self.get_operation(operation_id)
+        operation_instance: Operation = self.operation_repository.get(operation_id)
+        operation_action = self.operation_factory.get_operation(operation_instance.type)
+        
         result = self.calculate_result(operation_action, *arguments)
-        new_balance = self.calculate_new_user_balance(user_id, operation_action)
+        new_balance = self.calculate_new_user_balance(user_id, operation_instance)
         record = Record(
             user_id,
-            operation_action.operation.id,
-            operation_action.operation.cost,
+            operation_instance.id,
+            operation_instance.cost,
             new_balance,
             result,
         )
@@ -36,20 +38,16 @@ class ManageOperation:
         self.record_repository.insert(record)
         return result
 
-    def get_operation(self, operation_id):
-        operation_instance: Operation = self.operation_repository.get(operation_id)
-        operation_action = self.operation_factory.create(operation_instance.type)
-        return operation_action
 
     def calculate_result(self, operation_action, *arguments):
         calculator = CalculatorStrategy()
         result = calculator.calculate(operation_action, *arguments)
         return result
 
-    def calculate_new_user_balance(self, user_id, operation_action):
+    def calculate_new_user_balance(self, user_id, operation_instance):
         last_record: Record = self.record_repository.last_record_from_user(user_id)
         if last_record is not None:
-            amount_updated = last_record.user_balance - operation_action.operation.cost
+            amount_updated = last_record.user_balance - operation_instance.cost
         else:
-            amount_updated = self.NEW_USER_BALANCE - operation_action.operation.cost
+            amount_updated = self.NEW_USER_BALANCE - operation_instance.cost
         return amount_updated

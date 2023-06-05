@@ -39,6 +39,7 @@ class UserMockRepository(BaseRepository):
         return instances[0] if len(instances) else None
 
     def insert(self, instance: User):
+        instance.id = len(self.instances)+1
         self.instances.append(instance)
 
     def delete(self, id):
@@ -62,6 +63,7 @@ class OperationMockRepository(BaseRepository):
         return instances[0] if len(instances) else None
 
     def insert(self, instance: Operation):
+        instance.id = len(self.instances)+1
         self.instances.append(instance)
 
     def delete(self, id):

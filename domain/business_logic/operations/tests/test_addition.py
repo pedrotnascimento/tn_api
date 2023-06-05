@@ -1,12 +1,11 @@
 import unittest
-from domain.business_logic.operations.addition_operation import AdditionOperation
+from domain.business_logic.operations.addition_operation_action import AdditionOperationAction
 from domain.models.operation import Operation
 
 
 class TestAdditionOperation(unittest.TestCase):
     def test_addition(self):
-        operation_data = Operation("addition", 2)
-        operation_action = AdditionOperation(operation_data)
+        operation_action = AdditionOperationAction()
         result = operation_action.operate(1, 2)
         self.assertEqual(result, 3)
 
