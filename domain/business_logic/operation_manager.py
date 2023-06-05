@@ -7,7 +7,7 @@ from infrastructure.repositories.record_repository import RecordRepository
 from infrastructure.repositories.user_repository import UserRepository
 
 
-class ManageOperation:
+class OperationManager:
     NEW_USER_BALANCE = 10
     def __init__(
         self,

@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock
-from domain.business_logic.manage_operation import ManageOperation
+from domain.business_logic.operation_manager import OperationManager
 from domain.business_logic.operation_factory import OperationFactory
 from domain.business_logic.operations.addition_operation_action import AdditionOperationAction
 from domain.business_logic.test_utils.repositories_mocked import (
@@ -35,7 +35,7 @@ class TestManageOperation(unittest.TestCase):
         insert_spy = MagicMock(wraps=record_repository.insert)
         record_repository.insert = insert_spy
 
-        manager = ManageOperation(
+        manager = OperationManager(
             user_repository=UserMockRepository(self.users),
             operation_repository=OperationMockRepository(self.operators),
             record_repository=record_repository,
@@ -59,7 +59,7 @@ class TestManageOperation(unittest.TestCase):
         insert_spy = MagicMock(wraps=record_repository.insert)
         record_repository.insert = insert_spy
 
-        manager = ManageOperation(
+        manager = OperationManager(
             user_repository=UserMockRepository(self.users),
             operation_repository=OperationMockRepository(self.operators),
             record_repository=record_repository,
