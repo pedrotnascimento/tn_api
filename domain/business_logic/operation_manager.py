@@ -1,3 +1,4 @@
+from injector import inject
 from domain.business_logic.calculator import CalculatorStrategy
 from domain.business_logic.operation_factory import OperationFactory
 from domain.models.operation import Operation
@@ -9,6 +10,7 @@ from infrastructure.repositories.user_repository import UserRepository
 
 class OperationManager:
     NEW_USER_BALANCE = 10
+    @inject
     def __init__(
         self,
         user_repository: UserRepository,

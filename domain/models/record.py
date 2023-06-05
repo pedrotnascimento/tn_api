@@ -1,5 +1,5 @@
 from infrastructure.db import db
-
+from datetime import datetime as dt
 
 class Record(db.Model):
     __tablename__ = "record"
@@ -11,6 +11,7 @@ class Record(db.Model):
     user_balance = db.Column(db.Integer())
     operation_response = db.Column(db.String())
     status = db.Column(db.Boolean())
+    date = db.Column(db.DateTime())
 
     def __init__(
         self,
@@ -26,6 +27,7 @@ class Record(db.Model):
         self.user_balance = user_balance
         self.operation_response = operation_response
         self.status = True
+        self.date = dt.now()
 
     def __repr__(self):
         return f"""<record 
