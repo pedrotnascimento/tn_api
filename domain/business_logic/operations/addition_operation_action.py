@@ -6,4 +6,4 @@ class AdditionOperationAction(OperationActionAbstract):
         self.type = "addition"
 
     def operate(self, a: float, b: float) -> float:
-        return a + b
+        return float(a) + float(b)

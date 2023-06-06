@@ -8,6 +8,9 @@ API for a recruiting process
 ## Running
 > flask run
 
+## DEBUG
+> flask --app app.py --debug run
+
 ## Testing
 > python -m coverage run -m unittest 
 > python -m coverage html

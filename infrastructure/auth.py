@@ -36,7 +36,7 @@ def token_required(f):
 # Gerando token com base na Secret key do app e definindo expiração com 'exp'
 def authenticate():
     if not request.is_json:
-        return jsonify({"message": "Wrong data format type"}), 401
+        return None
 
     auth = request.get_json()
     username = auth["username"]
@@ -58,12 +58,5 @@ def authenticate():
         )
         return token
 
-    return (
-        jsonify(
-            {
-                "message": "could not verify",
-                "WWW-Authenticate": 'Basic auth="Login required"',
-            }
-        ),
-        401,
-    )
+    return None
+    
