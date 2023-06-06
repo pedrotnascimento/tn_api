@@ -1,3 +1,4 @@
+from app import app
 from domain.business_logic.operations.tests.test_addition import *
 from domain.business_logic.operations.tests.test_division import *
 from domain.business_logic.operations.tests.test_multiplication import *
