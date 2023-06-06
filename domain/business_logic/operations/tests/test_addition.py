@@ -1,6 +1,5 @@
 import unittest
 from domain.business_logic.operations.addition_operation_action import AdditionOperationAction
-from domain.models.operation import Operation
 
 
 class TestAdditionOperation(unittest.TestCase):

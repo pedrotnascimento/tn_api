@@ -2,6 +2,21 @@ import logging
 from os import environ
 from flask import Flask
 from flask_migrate import Migrate
+from domain.business_logic.operations.division_operation_action import (
+    DivisionOperationAction,
+)
+from domain.business_logic.operations.multiplication_operation_action import (
+    MultiplicationOperationAction,
+)
+from domain.business_logic.operations.random_string_operation_action import (
+    RandomStringGenerationOperationAction,
+)
+from domain.business_logic.operations.square_root_operation_action import (
+    SquareRootOperationAction,
+)
+from domain.business_logic.operations.subtraction_operation_action import (
+    SubtractionOperationAction,
+)
 from infrastructure.repositories.operation_repository import OperationRepository
 from infrastructure.repositories.record_repository import RecordRepository
 from flask_cors import CORS
@@ -17,12 +32,12 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("infoLogger")
 logger.setLevel(logging.INFO)
 
-if env== 'production':
+if env == "production":
     logger.info("Production environment settings")
-    app.config.from_object('config.ProdConfig')
+    app.config.from_object("config.ProdConfig")
 else:
     logger.info("Development environment settings")
-    app.config.from_object('config.DevConfig')
+    app.config.from_object("config.DevConfig")
 
 db.init_app(app)
 migrate = Migrate(app, db)
@@ -41,7 +56,14 @@ from injector import Injector, Module
 
 class AppModule(Module):
     def configure(self, binder):
-        operations_used = [AdditionOperationAction()]
+        operations_used = [
+            AdditionOperationAction(),
+            SubtractionOperationAction(),
+            MultiplicationOperationAction(),
+            DivisionOperationAction(),
+            RandomStringGenerationOperationAction(),
+            SquareRootOperationAction(),
+        ]
         op = OperationFactory(operations_used)
         binder.bind(OperationFactory, to=op)
         binder.bind(UserRepository)
