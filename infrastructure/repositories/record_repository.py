@@ -1,5 +1,10 @@
+from injector import inject
+from domain.models.operation import Operation
 from domain.models.record import Record
+from domain.models.user import User
 from infrastructure.db import db
+from infrastructure.repositories.operation_repository import OperationRepository
+from infrastructure.repositories.user_repository import UserRepository
 
 
 class RecordRepository:
@@ -17,14 +22,19 @@ class RecordRepository:
         db.session.add(record)
         db.session.commit()
 
-
     def get_pagination(self, user_id: int, page: int, per_page: int, order_by: str):
-        select_stmt = db.select(Record).where(Record.user_id == user_id)
+        select_stmt = (
+            db.session.query(Record, Operation, User)
+            .where(Record.user_id == user_id)
+            .join(Operation)
+            .join(User)
+            .add_columns(Operation.type, Operation.id, User.username, Operation.id)
+        )
+
         if order_by == "desc":
             select_stmt = select_stmt.order_by(Record.date.desc())
         else:
             select_stmt = select_stmt.order_by(Record.date)
-        paginated_items = db.paginate(
-            select=select_stmt, page=page, per_page=per_page, count=True
-        )
+        paginated_items = select_stmt.paginate(page=page, per_page=per_page, count=True)
+
         return paginated_items

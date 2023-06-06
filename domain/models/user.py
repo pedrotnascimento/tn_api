@@ -8,6 +8,7 @@ class User(db.Model):
     username = db.Column(db.String())
     password = db.Column(db.String())
     status = db.Column(db.Boolean())
+    records = db.relationship('Record', backref='user')
 
     def __init__(self, username: str, password: str):
         self.username = username

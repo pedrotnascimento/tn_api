@@ -7,6 +7,7 @@ class Operation(db.Model):
     type = db.Column(db.String())
     cost = db.Column(db.Integer())
     status = db.Column(db.Boolean())
+    records = db.relationship('Record', backref='operation')
 
     def __init__(self, type: str, cost: int):
         self.type = type

@@ -9,8 +9,8 @@ import infrastructure.auth as auth
 @auth.token_required
 def get_records(**kwargs):
     page = int(request.args.get("page", 1))
-    per_page = int(request.args.get("per_page", 10))
-    order_by = str(request.args.get("order_by", "asc"))
+    per_page = int(request.args.get("perPage", 10))
+    order_by = str(request.args.get("orderBy", "asc"))
 
     record_service = injector.get(RecordService)
     user: User = kwargs["user_session"]
@@ -20,11 +20,13 @@ def get_records(**kwargs):
     for obj in response["data"]:
         response_data.append(
             {
-                "user_id": obj.user_id,
-                "operation_id": obj.operation_id,
-                "id": obj.id,
-                "operation_response": obj.operation_response,
-                "user_balance": obj.user_balance,
+                "userId": obj[0].user_id,
+                "operationId": obj[0].operation_id,
+                "operationType": obj[1].type,
+                "userName": obj[2].username,
+                "id": obj[0].id,
+                "operationResponse": obj[0].operation_response,
+                "userBalance": obj[0].user_balance,
             }
         )
     response["data"] = response_data

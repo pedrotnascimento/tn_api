@@ -20,8 +20,8 @@ class RecordService:
 
         response = {
             "page": paginated_items.page,
-            "per_page": paginated_items.per_page,
-            "total_items": paginated_items.total,
+            "perPage": paginated_items.per_page,
+            "totaltems": paginated_items.total,
             "data": paginated_items.items,
             "pages": paginated_items.pages,
         }

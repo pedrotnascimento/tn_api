@@ -1,5 +1,5 @@
 
-INSERT INTO operation(type, cost, status)  VALUES 
+INSERT INTO "operation"(type, cost, status)  VALUES 
 ('addition', 1,TRUE),
 ('subtraction', 1,TRUE),
 ('multiplication', 2,TRUE),

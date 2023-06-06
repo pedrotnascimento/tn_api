@@ -5,8 +5,8 @@ class Record(db.Model):
     __tablename__ = "record"
 
     id = db.Column(db.Integer(), primary_key=True)
-    operation_id = db.Column(db.Integer())
-    user_id = db.Column(db.Integer())
+    operation_id = db.Column(db.Integer(), db.ForeignKey('operation.id'))
+    user_id = db.Column(db.Integer(), db.ForeignKey('user.id'))
     amount = db.Column(db.Integer())
     user_balance = db.Column(db.Integer())
     operation_response = db.Column(db.String())
