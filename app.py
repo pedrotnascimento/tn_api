@@ -2,6 +2,7 @@ import logging
 from os import environ
 from flask import Flask
 from flask_migrate import Migrate
+from domain.business_logic.services.record_service import RecordService
 from domain.business_logic.operations.division_operation_action import (
     DivisionOperationAction,
 )
@@ -69,10 +70,11 @@ class AppModule(Module):
         binder.bind(UserRepository)
         binder.bind(OperationRepository)
         binder.bind(RecordRepository)
+        binder.bind(RecordService)
 
 
 injector = Injector(AppModule())
-
+CONST_USER_BALANCE_FOR_NEW_USERS = 10
 
 @app.route("/")
 def test_connection():

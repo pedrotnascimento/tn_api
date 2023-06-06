@@ -32,8 +32,6 @@ def token_required(f):
 
     return decorated
 
-
-# Gerando token com base na Secret key do app e definindo expiração com 'exp'
 def authenticate():
     if not request.is_json:
         return None

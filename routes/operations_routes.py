@@ -2,7 +2,7 @@ from app import app, injector
 from flask import abort, request
 from flask import jsonify
 from domain.business_logic.operation_manager import OperationManager
-from domain.business_logic.services.user_service import UserService
+# from domain.business_logic.operation_manager import OperationManager
 from domain.models.user import User
 import infrastructure.auth as auth
 

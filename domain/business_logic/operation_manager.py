@@ -1,4 +1,5 @@
 from injector import inject
+from app import CONST_USER_BALANCE_FOR_NEW_USERS
 from domain.business_logic.calculator import CalculatorStrategy
 from domain.business_logic.operation_factory import OperationFactory
 from domain.models.operation import Operation
@@ -9,8 +10,6 @@ from infrastructure.repositories.user_repository import UserRepository
 
 
 class OperationManager:
-    NEW_USER_BALANCE = 10
-
     @inject
     def __init__(
         self,
@@ -25,7 +24,9 @@ class OperationManager:
         self.operation_factory = operation_factory
 
     def get_result(self, user_id, operation_type, *arguments):
-        operation_instance: Operation = self.operation_repository.get_by_type(operation_type)
+        operation_instance: Operation = self.operation_repository.get_by_type(
+            operation_type
+        )
         operation_action = self.operation_factory.get_operation(operation_instance.type)
 
         last_record = self.record_repository.last_record_from_user(user_id)
@@ -55,5 +56,5 @@ class OperationManager:
         if last_record is not None:
             amount_updated = last_record.user_balance - operation_instance.cost
         else:
-            amount_updated = self.NEW_USER_BALANCE - operation_instance.cost
+            amount_updated = CONST_USER_BALANCE_FOR_NEW_USERS - operation_instance.cost
         return amount_updated

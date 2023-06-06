@@ -26,8 +26,9 @@ def create_user():
 def get_user_balance(**kwargs):
     user = kwargs["user_session"]
     user_id = user.id
-    record_service = injector.get(RecordService)
-    record = record_service.last_record_from_user(user_id)
-    if record is None:
+    user_service = injector.get(UserService)
+    user_balance = user_service.last_record_from_user(user_id)
+    
+    if user_balance is None:
         abort(400)
-    return jsonify({"userBalance": record.user_balance}), 200
+    return jsonify({"userBalance": user_balance}), 200
