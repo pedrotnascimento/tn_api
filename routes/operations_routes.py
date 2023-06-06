@@ -16,7 +16,7 @@ def make_operation(**kwargs):
         operation_manager: OperationManager = injector.get(OperationManager)
         user: User = kwargs["user_session"]
         user_id = user.id
-        operation_type = data["operation_type"]
+        operation_type = data["operationType"]
         arguments = tuple(data["arguments"])
         if user_id is None:
             abort(400)

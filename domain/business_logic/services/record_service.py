@@ -26,3 +26,7 @@ class RecordService:
             "pages": paginated_items.pages,
         }
         return response
+
+    def last_record_from_user(self, user_id):
+        user = self.record_repository.last_record_from_user(user_id)
+        return user
