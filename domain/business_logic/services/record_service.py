@@ -33,3 +33,6 @@ class RecordService:
     def last_record_from_user(self, user_id):
         user = self.record_repository.last_record_from_user(user_id)
         return user
+
+    def soft_delete(self, record_id ):
+        self.record_repository.soft_delete(record_id)

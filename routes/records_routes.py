@@ -33,3 +33,11 @@ def get_records(**kwargs):
         )
     response["data"] = response_data
     return jsonify(response)
+
+
+@app.route("/v1/records/<record_id>", methods=["DELETE"])
+@auth.token_required
+def delete_records(record_id, **kwargs):
+    record_service:RecordService = injector.get(RecordService)
+    record_service.soft_delete(record_id)
+    return jsonify({}),200

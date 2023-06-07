@@ -40,7 +40,7 @@ class RecordRepository:
         
         select_stmt = (
             db.session.query(Record, Operation, User)
-            .where(Record.user_id == user_id)
+            .where(Record.user_id == user_id, Record.status==True)
             .join(Operation)
             .join(User)
             .add_columns(Operation.type, Operation.id, User.username, Operation.id)
@@ -58,3 +58,11 @@ class RecordRepository:
         paginated_items = select_stmt.paginate(page=page, per_page=per_page, count=True)
         
         return paginated_items
+
+    def soft_delete(self, record_id):
+        item:Record = Record.query.where(record_id==Record.id).first()
+        if not item:
+            return 
+        item.status = False
+        db.session.commit()
+            
