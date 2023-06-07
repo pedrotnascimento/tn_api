@@ -22,7 +22,22 @@ class RecordRepository:
         db.session.add(record)
         db.session.commit()
 
-    def get_pagination(self, user_id: int, page: int, per_page: int, order_by: str):
+    def get_pagination(
+        self,
+        user_id: int,
+        page: int,
+        per_page: int,
+        order_field: str,
+        order_direction: str,
+    ):
+        dict_field ={
+            "id": Record.id,
+            "operationType": Operation.type,
+            "operationResponse": Record.operation_response,
+            "userBalance": Record.user_balance,
+            "date": Record.date,
+        }
+        
         select_stmt = (
             db.session.query(Record, Operation, User)
             .where(Record.user_id == user_id)
@@ -31,10 +46,15 @@ class RecordRepository:
             .add_columns(Operation.type, Operation.id, User.username, Operation.id)
         )
 
-        if order_by == "desc":
-            select_stmt = select_stmt.order_by(Record.date.desc())
+        if order_field!= "":
+            
+            if  order_direction == "desc":
+                select_stmt = select_stmt.order_by(dict_field[order_field].desc())
+            else:
+                select_stmt = select_stmt.order_by(dict_field[order_field])
         else:
-            select_stmt = select_stmt.order_by(Record.date)
+             select_stmt.order_by(Record.id)
+        
         paginated_items = select_stmt.paginate(page=page, per_page=per_page, count=True)
-
+        
         return paginated_items

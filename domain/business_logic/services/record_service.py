@@ -13,9 +13,12 @@ class RecordService:
     def __init__(self, record_repository: RecordRepository):
         self.record_repository = record_repository
 
-    def get_pagination(self, user_id: int, page: int, per_page: int, order_by: str):
+    def get_pagination(
+        self, user_id: int, page: int, per_page: int, 
+        order_field: str, order_direction
+    ):
         paginated_items = self.record_repository.get_pagination(
-            user_id, page, per_page, order_by
+            user_id, page, per_page, order_field,order_direction
         )
 
         response = {

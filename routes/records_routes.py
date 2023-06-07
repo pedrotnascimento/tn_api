@@ -10,12 +10,14 @@ import infrastructure.auth as auth
 def get_records(**kwargs):
     page = int(request.args.get("page", 1))
     per_page = int(request.args.get("perPage", 10))
-    order_by = str(request.args.get("orderBy", "asc"))
+    order_by_field = str(request.args.get("sortField", ""))
+    order_by_direction = str(request.args.get("sortDirection", "desc"))
 
     record_service = injector.get(RecordService)
     user: User = kwargs["user_session"]
     user_id = user.id
-    response = record_service.get_pagination(user_id, page, per_page, order_by)
+    
+    response = record_service.get_pagination(user_id, page, per_page,order_by_field,order_by_direction)
     response_data = []
     for obj in response["data"]:
         response_data.append(
