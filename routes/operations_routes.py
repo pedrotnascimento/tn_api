@@ -6,12 +6,9 @@ from domain.models.user import User
 from domain.business_logic.operation_manager import OperationManager
 
 
-
-
 @app.route("/v1/operations", methods=["POST"])
 @auth.token_required
 def make_operation(**kwargs):
-    
     if request.is_json:
         data = request.get_json()
         operation_manager: OperationManager = injector.get(OperationManager)
@@ -26,7 +23,7 @@ def make_operation(**kwargs):
 
         response = operation_manager.get_result(user_id, operation_type, *arguments)
         if response == OperationManager.CODE_NO_BALANCE:
-            return jsonify({'error':response}), 400
+            return jsonify({"error": response}), 400
         if response is None:
             abort(400)
         return jsonify({"result": response}), 201

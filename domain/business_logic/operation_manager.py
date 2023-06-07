@@ -1,5 +1,5 @@
 from injector import inject
-from app import CONST_USER_BALANCE_FOR_NEW_USERS
+from domain.business_logic.constants import CONST_USER_BALANCE_FOR_NEW_USERS
 from domain.business_logic.calculator import CalculatorStrategy
 from domain.business_logic.operation_factory import OperationFactory
 from domain.models.operation import Operation

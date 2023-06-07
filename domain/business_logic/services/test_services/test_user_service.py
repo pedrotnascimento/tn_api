@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock
-from app import CONST_USER_BALANCE_FOR_NEW_USERS
+from domain.business_logic.constants import CONST_USER_BALANCE_FOR_NEW_USERS
 from domain.business_logic.services.record_service import RecordService
 from domain.business_logic.services.user_service import UserService
 from domain.business_logic.test_utils.repositories_mocked import (
