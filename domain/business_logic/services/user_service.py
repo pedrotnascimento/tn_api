@@ -1,5 +1,5 @@
 from injector import inject
-from app import CONST_USER_BALANCE_FOR_NEW_USERS
+from domain.business_logic.constants import  CONST_USER_BALANCE_FOR_NEW_USERS
 from domain.business_logic.services.record_service import RecordService
 from domain.models.user import User
 from infrastructure.repositories.user_repository import UserRepository

@@ -25,6 +25,8 @@ def make_operation(**kwargs):
             abort(400)
 
         response = operation_manager.get_result(user_id, operation_type, *arguments)
+        if response == OperationManager.CODE_NO_BALANCE:
+            return jsonify({'error':response}), 400
         if response is None:
             abort(400)
         return jsonify({"result": response}), 201

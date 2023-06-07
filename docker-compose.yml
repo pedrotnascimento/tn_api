@@ -1,12 +1,9 @@
-version: '3'
 services:
   db:
     image: postgres:15-alpine3.18
     restart: always
     volumes:
       - pgdata:/var/lib/postgresql/data
-    networks:
-      - truenorth
     environment:
       POSTGRES_PASSWORD: admin
       POSTGRES_HOST_AUTH_METHOD: trust
@@ -14,15 +11,7 @@ services:
       - "5432:5432"
     expose:
       - 5432
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
 
 volumes:
   pgdata:
     # driver: local
-networks:
-  truenorth:
-    driver: bridge

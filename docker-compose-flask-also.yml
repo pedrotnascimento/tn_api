@@ -1,0 +1,32 @@
+services:
+  flask:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    container_name: flask
+    environment:
+      - ENVIRONMENT=container
+      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:admin@db:5432/db_local
+    command: >
+      sh -c  "python -m coverage run -m unittest && 
+      python3 -m  flask run --host=0.0.0.0"
+    ports:
+      - 5000:5000
+  db:
+    image: postgres:15-alpine3.18
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+
+volumes:
+  pgdata:
+    # driver: local

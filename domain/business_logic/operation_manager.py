@@ -8,8 +8,8 @@ from infrastructure.repositories.operation_repository import OperationRepository
 from infrastructure.repositories.record_repository import RecordRepository
 from infrastructure.repositories.user_repository import UserRepository
 
-
 class OperationManager:
+    CODE_NO_BALANCE= "NO_BALANCE"
     @inject
     def __init__(
         self,
@@ -32,7 +32,7 @@ class OperationManager:
         last_record = self.record_repository.last_record_from_user(user_id)
         if last_record is not None:
             if last_record.user_balance - operation_instance.cost < 0:
-                return None
+                return self.CODE_NO_BALANCE
 
         result = self.calculate_result(operation_action, *arguments)
         new_balance = self.calculate_new_user_balance(last_record, operation_instance)
@@ -43,7 +43,6 @@ class OperationManager:
             new_balance,
             result,
         )
-
         self.record_repository.insert(record)
         return result
 

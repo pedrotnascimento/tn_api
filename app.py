@@ -36,6 +36,9 @@ logger.setLevel(logging.INFO)
 if env == "production":
     logger.info("Production environment settings")
     app.config.from_object("config.ProdConfig")
+elif env== "container":
+    logger.info("Container environment settings")
+    app.config.from_object("config.ContainerConfig")
 else:
     logger.info("Development environment settings")
     app.config.from_object("config.DevConfig")
@@ -74,7 +77,7 @@ class AppModule(Module):
 
 
 injector = Injector(AppModule())
-CONST_USER_BALANCE_FOR_NEW_USERS = 10
+
 
 @app.route("/")
 def test_connection():

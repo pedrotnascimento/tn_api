@@ -16,3 +16,9 @@ class DevConfig():
     FLASK_DEBUG = True
     SECRET_KEY = "someRandomSecretKey"
     SQLALCHEMY_DATABASE_URI = "postgresql://postgres:admin@localhost:5432/db_local"
+
+class ContainerConfig():
+    FLASK_ENV = "container"
+    FLASK_DEBUG = True
+    SECRET_KEY = "someRandomSecretKey"
+    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:admin@db:5432/db_local"
