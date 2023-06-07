@@ -20,8 +20,7 @@ class TestRecordService(unittest.TestCase):
 
     def test_should_return_none_if_there_is_no_last_record(self):
         user_balance = 4
-        records = [Record(1, 1, 3, user_balance=user_balance, operation_response="any")]
-        record_repo = RecordMockRepository(records)
+        record_repo = RecordMockRepository([])
 
         last_record = record_repo.last_record_from_user(1)
         self.assertIsNone(last_record)

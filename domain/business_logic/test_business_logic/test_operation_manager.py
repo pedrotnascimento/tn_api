@@ -94,7 +94,7 @@ class TestManageOperation(unittest.TestCase):
 
         result = manager.get_result(self.user1.id, self.operators[0].type, 1, 2)
 
-        self.assertEqual(result, None)
+        self.assertEqual(result, OperationManager.CODE_NO_BALANCE)
         insert_spy.assert_not_called()
 
 
