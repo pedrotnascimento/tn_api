@@ -7,7 +7,7 @@ FROM compile-so as compile-image
 COPY requirements.txt .
 RUN pip install --user  -r requirements.txt
 
-FROM compile-libpq-dev
+FROM compile-image
 EXPOSE 5000
 EXPOSE 5432
 WORKDIR /app

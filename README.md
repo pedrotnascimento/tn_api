@@ -48,3 +48,6 @@ BODY:
 
 - Create new task on AWS ECR (Elastic Container Registry) Service "# tn_front" 
 
+## Load Balance URl
+
+> http://tn-api-118067680.sa-east-1.elb.amazonaws.com/
