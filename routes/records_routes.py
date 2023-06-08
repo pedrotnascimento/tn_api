@@ -11,13 +11,23 @@ def get_records(**kwargs):
     page = int(request.args.get("page", 1))
     per_page = int(request.args.get("perPage", 10))
     order_by_field = str(request.args.get("sortField", ""))
-    order_by_direction = str(request.args.get("sortDirection", "desc"))
+    order_by_direction = str(request.args.get("sortDirection", "asc"))
+    filter_field = str(request.args.get("filterField", ""))
+    filter_value = str(request.args.get("filterValue", ""))
 
     record_service = injector.get(RecordService)
     user: User = kwargs["user_session"]
     user_id = user.id
-    
-    response = record_service.get_pagination(user_id, page, per_page,order_by_field,order_by_direction)
+
+    response = record_service.get_pagination(
+        user_id,
+        page,
+        per_page,
+        order_by_field,
+        order_by_direction,
+        filter_field,
+        filter_value,
+    )
     response_data = []
     for obj in response["data"]:
         response_data.append(
@@ -38,6 +48,6 @@ def get_records(**kwargs):
 @app.route("/v1/records/<record_id>", methods=["DELETE"])
 @auth.token_required
 def delete_records(record_id, **kwargs):
-    record_service:RecordService = injector.get(RecordService)
+    record_service: RecordService = injector.get(RecordService)
     record_service.soft_delete(record_id)
-    return jsonify({}),200
+    return jsonify({}), 200

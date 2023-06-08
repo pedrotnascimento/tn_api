@@ -29,40 +29,43 @@ class RecordRepository:
         per_page: int,
         order_field: str,
         order_direction: str,
+        filter_field: str,
+        filter_value: str,
     ):
-        dict_field ={
+        dict_field = {
             "id": Record.id,
             "operationType": Operation.type,
             "operationResponse": Record.operation_response,
             "userBalance": Record.user_balance,
             "date": Record.date,
         }
-        
+
         select_stmt = (
             db.session.query(Record, Operation, User)
-            .where(Record.user_id == user_id, Record.status==True)
+            .where(Record.user_id == user_id, Record.status == True)
             .join(Operation)
             .join(User)
             .add_columns(Operation.type, Operation.id, User.username, Operation.id)
         )
 
-        if order_field!= "":
-            
-            if  order_direction == "desc":
+        if filter_field != "":
+            select_stmt = select_stmt.filter(dict_field[filter_field].ilike(f'%{filter_value}%'))
+
+        if order_field != "":
+            if order_direction == "desc":
                 select_stmt = select_stmt.order_by(dict_field[order_field].desc())
             else:
                 select_stmt = select_stmt.order_by(dict_field[order_field])
         else:
-             select_stmt.order_by(Record.id)
-        
+            select_stmt.order_by(Record.id)
+
         paginated_items = select_stmt.paginate(page=page, per_page=per_page, count=True)
-        
+
         return paginated_items
 
     def soft_delete(self, record_id):
-        item:Record = Record.query.where(record_id==Record.id).first()
+        item: Record = Record.query.where(record_id == Record.id).first()
         if not item:
-            return 
+            return
         item.status = False
         db.session.commit()
-            

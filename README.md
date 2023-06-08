@@ -19,7 +19,7 @@ Register your tests into ./tests.py file
 
 ## Loading Database
 With the docker-compose.yml running
-> docker-compose-up
+> docker-compose up
 
 > flask db upgrade
 
