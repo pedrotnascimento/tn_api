@@ -51,3 +51,12 @@ BODY:
 ## Load Balance URl
 
 > http://tn-api-118067680.sa-east-1.elb.amazonaws.com/
+
+#### Feedback:
+Here are some comments on the points to improve:
+- If the token is not valid the user should not be able to access the site. 
+- Validations are missing in the operations and for this reason some of them fail. The error messages are not correct.
+- More tests could have been added on the front-end. The logs are not enough to determine the failures in the application.
+- The list of operations has some bugs, for example the sorting.
+- Validations should also be included in the endpoint parameters on the API.
+- The tests are not enough to cover the basic cases in the API. The password is not encrypted in the DB."
