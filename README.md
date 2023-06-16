@@ -60,3 +60,8 @@ Here are some comments on the points to improve:
 - The list of operations has some bugs, for example the sorting.
 - Validations should also be included in the endpoint parameters on the API.
 - The tests are not enough to cover the basic cases in the API. The password is not encrypted in the DB."
+
+
+#### References:
+- https://medium.com/@hedgarbezerra35/api-rest-com-flask-autenticacao-25d99b8679b6
+- https://realpython.com/flask-by-example-part-1-project-setup/
