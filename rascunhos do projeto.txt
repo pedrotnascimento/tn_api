@@ -1,0 +1,243 @@
+- conectar ao banco de dados: elasticsearch / use postgresql instead mongoDb [V]
+- authentication [V]
+- banco de dados no aws [V]
+- deploy on aws [V]
+- multi stage docker [V]
+- adicionar teste [V]
+- teste de cobertura [V]
+- configuracao da aplicacao [V]
+- deploy de vue.js
+- teste em vue.js
+ITS OK ALL FEATURES DONT BE AT THE SAME NETWORK BUT EXCHANGE DATA ANYWAY AT LOCALHOST
+TRY TO SEE THE IP FOR EACH CONTAINER IF THEY MATCH THE DOCKER NETWORK
+
+========Extras
+- teste de mutação X
+- teste automatizado X
+- subir tudo(banco e flask (e vue))
+- unittest descobrir testes sozinho
+- injecao de dependencia na hora de testar também 
+- colocar script de banco de dados de carga dentro do container docker do postgresql
+- mais testes e mais validações na api
+- nao pediu perfis diferentes
+- colocar variavel de custo inicial no config
+- não pediu nada de fila 
+- configuracao do coverage 
+- escalonar aplicacao, 	load balance, gateways
+- guardar os tokens num banco de dados para validar 
+- proteger aplicação do react 
+- perguntar se usuario quer deletar com uma modal 
+- colocar configuracao de loger tbm pra debug
+-----
+VACILOS
+-  consegui estilizar a pagina[V]
+- problemas na hora de realizar a migracao do banco de dados em producao [V]
+- container docker de flask nao conectando com postgres local  [V]
+- nao consegui usar sqlalchemy e tive q usar o flask_sqlalchemy [V]
+- não usei VUe , mas tudo bem tbm
+----------------------------------------------------------------------------	
+- criar modelos [V]
+- criar regras de negócios [V]
+- testar regras de negocios [V]
+- criar as views controllers do python 
+	- criar rota de criar usuario [V]
+	- criar rota de operacao 
+	- criar carga das actions [V] e de um usuario admin[X - não tem como, pq password está hashed]
+	
+- criar o banco de dados  (usando container) [V]
+	- criar script de carga [V]
+- retirar métodos inuteis de repositorio[V]
+
+- colocar autenticação  [V]
+- adicionar CORS [V]
+- gerar configuracao para dev e prod [V]
+- criar imagem docker [V]
+- subir no aws e testar [V]
+- criar filtro e paginacao [V]
+- gerar rota de buscar operadores [X]
+- gerar outros operadores [V]
+- testar exclusao de records  [V]
+- gerar api de excluir records [V]
+- testar operation_manager na hora de pegar records [V]
+- last record from user tem que ver status do record tbm(se está deletado) [V] pior q nao 
+
+- gerar colecao de postman
+
+----
+fazer a tela e receber os dados 
+- tela de login 
+	- logar  [V]
+	- mostrar botao de deslogar num header [V]
+-dashboard
+	realizar operacao [V]
+	TRAZER user_balance [V]
+	consultar operacoes feitas [V]
+- tela de realizar operacoes
+	- criar componente de operacoesPanel [V]
+	- colocar botao de enviar operacao em operacoesPanel [V]
+	- mostrar resultado em operacoesPanel [V]
+	- atualizar user_balance [V]
+	- cadastrar cada operacao em operacoes  [V]
+	- para cada operacao ter seu componente  [V]
+- tela de operacoes feitas 
+	- datatable  [V]
+	- implementa rota de deletar  [V]
+	- implementar caso de uso onde usuario tem record deletado[V]
+	- excluir e atualizar a tabela mantendo a paginacao [V]
+	- ordenacao e filtro 
+	
+	
+- (os testes ficam mais na parte do backend mesmo)
+=================
+- FAZER DOUBLE CHECK de colocar autenticacao NAS ROTAS [V]
+
+- criar servicos no frontend pra isolar conexao externa [V]
+- fazer rodar com docker-compose up  [V]
+	- fazer rodar com docker cada ambiente  [V]
+- subir aplicacao react [V]
+- fazer um docker-compose unico [V]
+- unittest descobrir testes sozinho[V]
+- bearer token 
+- Many Templates 
+- usar melhor a api de random string 
+- colocar script de banco de dados de carga dentro do container docker do postgresql
+--- FIM
+
+--------	
+- conectando ao postgresql: migrations using flask
+---
+- pagination and filters
+- unit test it 
+
+- create narrative
+- I choose doing api at flask instead of Django for abillity purposes: because django has a lot features ready to use, but flask is something else, its hard, you need to be more patient so I really can bring what I can learn that what I can do and that is what I believe a best candidate will have, abillity to learn more than just do
+but talk about the real world problem: Django we have more community and seems better for long time projects, flask its fast and small and we got have fearless engineers for getting deeper.
+- Elasticsearch because the mongo db engine documentation I looked for seems legacy and elasticsearch its used in the job description stack
+But talk about the real world problem
+- I started to study how to deploy in aws, deploying database, deploying using docker, using local image of postgres, getting everything together, remembering how migration works in flask
+So first I was trying to study and test everything that I thought that it could take time and effort, like deploying, configurations of environments 
+For me thats the main reason a delivery is poor, because a lot of effort is concetrated in doing the challenge, but doing the challenge its easy because this we do everyday while working 
+the problem its the ones which appears not frequentelly in the job.
+When I set everything up, I started in the backend implemeting the business logic and the model, each milestone I tested the code and commited
+so the software grown most of the time without refactoring and the refactor I did I had tests for running and test if something broke.
+then I implemeting just one operation and with that operation I grow the backend until the deploy, 
+after that I jumped to the frontend, first I tried to do it in vue, it would be great, but i was kind tired from the backend and I was too slow thinking how I could implement.
+than after 2h I let go the idea of vue and started to work on  react application.
+I designed how the components would be mixed together before coding anything and then I started to code in react 
+my brain automatically boosted up, and I kind missed programming in react.js, for now I'm doing things more in angular
+Its was kind easy, it was just integrate with the api and separating the concerns.
+of course, I didnt make effort to keep the things beautiful, but I applied style when necessary for readability, for example, how the components would be displayed.
+In react I tried to use more dehcoupling and cohesion than showing things beautiful
+But anyway I used bootstrap-4  and react-datatable for getting a little more stylish 
+and the datatable worked fine but when I tried to sort using server-side pagination it didnt work very well, It was kinda buggy 
+so I let go and just kept the sort and filtering via api 
+
+
+
+==========
+elasticsearch
+trazer para versão mais recente(destruir todo cache do docker da image anterior pra subir uma nova sem pedir pra atualizar nada)
+sudo sysctl -w vm.max_map_count=262144
+environment:
+      - xpack.security.enabled= false
+      - xpack.security.transport.ssl.enabled= false
+https://tamirsuliman.medium.com/use-docker-to-deploy-elasticsearch-kibana-environment-6344cb801fe7
+
+docker 
+docker exec -it <mycontainer> bash
+docker run --network=flask_auth_elastic -p 5000:5000 -e ELASTIC_NETWORK_URL=http://es01:9200 --name flask flask:1       
+EXPOSE 5000
+CMD ["python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+DOCKER  TOKEN
+dckr_pat_lTO1bia7M1SMymL6HmewSgH16rc
+PROVAVEL nao existenecia da imaggem ou erro de typo na image de multi stage :
+	- failed to solve: failed to load cache key: pull access denied, repository does not exist or may require authorization: server message: insufficient_scope: authorization failed
+
+
+
+postgresql
+psql -h localhost -p 5432 -U postgres (senha a mesma passada no docker container)
+INSERT INTO "user" (id, username,password,status) values(1,'pedro', 'abc', true);
+select * from "user";
+\l dbs_disponiveis
+\c db_selecionada
+\dt display_tables
+
+Amazon
+Amazon ECS - elastic container service
+AWS Fargate
+amazon RDS
+security group
+docker tag tn:2 917957058161.dkr.ecr.sa-east-1.amazonaws.com/tn-repository
+aws ecr get-login-password --region sa-east-1 
+docker login -u AWS -p [BASE64_HASH_FROM_COMMAND_ABOVE] 917957058161.dkr.ecr.sa-east-1.amazonaws.com
+docker push 917957058161.dkr.ecr.sa-east-1.amazonaws.com/tn-repository
+Access key: AKIA5LOUBDZY3Z47556X
+Secret access key: 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
+{
+    "repository": {
+        "repositoryArn": "arn:aws:ecr:sa-east-1:917957058161:repository/tn-repository",
+        "registryId": "917957058161",
+        "repositoryName": "tn-repository",
+        "repositoryUri": "917957058161.dkr.ecr.sa-east-1.amazonaws.com/tn-repository",
+        "createdAt": "2023-06-03T03:13:02-03:00",
+        "imageTagMutability": "MUTABLE",
+        "imageScanningConfiguration": {
+            "scanOnPush": false
+        },
+        "encryptionConfiguration": {
+            "encryptionType": "AES256"
+        }
+    }
+}
+https://towardsdatascience.com/deploying-a-docker-container-with-ecs-and-fargate-7b0cbc9cd608
+https://medium.com/@giritech7/aws-set-environment-variable-for-ecs-tasks-a7ea3bf1d56f
+---POLICY FOR PUTTING ENVIRONMENT VARIABLES: arn:aws:ssm:*:917957058161:parameter/*
+Set environment variables through task definitions, create new revision and set the variables  or define in JSON configuration the task definition
+
+
+CMD
+cls
+configuracao default
+
+soft skills
+ler o artigo primeiro pra depois codar,
+ler por alto mas ler atento
+nem sempre o artigo está atualizado
+nem sempre o artigo vai usar somente o que precisa
+artigos dão insight de como melhorar a solução
+
+
+vue 
+this.$router.push('www.yoursite.com/blog');
+setup => composition API
+
+python 
+python -m coverage run -m unittest tests.py
+python -m coverage report
+python -m coverage html 
+flask --app app.py --debug run
+injector (usei chat gpt)
+MagicMock para spy (usei chat gpt)
+factory - ask for a object, abstract factory - ask for a set of objects
+logging
+
+erro de connection nem sempre é seu as vezes é servidor caído, e as vezes vc tem que resetar o modem
+ 
+FDPutas
+realpython
+medium
+towardscience
+ 
+https://www.geeksforgeeks.org/how-to-list-tables-using-sqlite3-in-python/ 
+ 
+
+React
+useCallback ele salva muito o estado anterior 
+axios é bom pra mandar mensagem sem stringifada
+fetch só com string 
+npx create-react-app --template typescript
+tanstack react-table 
+Bootstrap-4 react table
+
+
