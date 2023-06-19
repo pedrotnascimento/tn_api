@@ -172,8 +172,7 @@ docker tag tn:2 917957058161.dkr.ecr.sa-east-1.amazonaws.com/tn-repository
 aws ecr get-login-password --region sa-east-1 
 docker login -u AWS -p [BASE64_HASH_FROM_COMMAND_ABOVE] 917957058161.dkr.ecr.sa-east-1.amazonaws.com
 docker push 917957058161.dkr.ecr.sa-east-1.amazonaws.com/tn-repository
-Access key: AKIA5LOUBDZY3Z47556X
-Secret access key: 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
+
 {
     "repository": {
         "repositoryArn": "arn:aws:ecr:sa-east-1:917957058161:repository/tn-repository",
